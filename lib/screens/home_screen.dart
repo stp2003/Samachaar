@@ -5,6 +5,7 @@ import 'package:samachaar/services/category_data.dart';
 import 'package:samachaar/services/slider_data.dart';
 import 'package:samachaar/widgets/app_bar.dart';
 import 'package:samachaar/widgets/build_image.dart';
+import 'package:samachaar/widgets/build_indicator.dart';
 
 import '../model/category_model.dart';
 import '../widgets/category_tile.dart';
@@ -59,6 +60,39 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 30.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0, right: 15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Breaking News!!",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                      letterSpacing: 0.8,
+                    ),
+                  ),
+                  InkWell(
+                    splashColor: Colors.purple,
+                    onTap: () {},
+                    child: const Text(
+                      "View All",
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.orangeAccent,
+                        color: Colors.orange,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.0,
+                        letterSpacing: 0.6,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 25.0),
             CarouselSlider.builder(
               itemCount: sliders.length,
               itemBuilder: (context, index, realIndex) {
@@ -78,6 +112,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   );
                 },
+              ),
+            ),
+            const SizedBox(height: 30.0),
+            Center(
+              child: BuildIndicator(
+                activeIndex: activeIndex,
+                count: sliders.length,
               ),
             ),
           ],
