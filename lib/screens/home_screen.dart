@@ -6,6 +6,7 @@ import 'package:samachaar/services/slider_data.dart';
 import 'package:samachaar/widgets/app_bar.dart';
 import 'package:samachaar/widgets/build_image.dart';
 import 'package:samachaar/widgets/build_indicator.dart';
+import 'package:samachaar/widgets/trending_news.dart';
 
 import '../model/category_model.dart';
 import '../widgets/category_tile.dart';
@@ -154,6 +155,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 10.0),
+              const TrendingNews(
+                  imageUrl: 'assets/health.jpg',
+                  title: 'Trending',
+                  desc: 'skhahdlsjfhkldhflkfx',
+                  url: 'dklh'),
+              const TrendingNews(
+                  imageUrl: 'assets/health.jpg',
+                  title: 'Trending',
+                  desc: 'skhahdlsjfhkldhflkfx',
+                  url: 'dklh'),
             ],
           ),
         ),
