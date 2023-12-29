@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:samachaar/screens/home_screen.dart';
+import 'package:samachaar/screens/landing_screen.dart';
 
 import 'constant/colors.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: bgColor,
         appBarTheme: const AppBarTheme(color: appBarColor),
       ),
-      home: const HomeScreen(),
+      home: const LandingScreen(),
     );
   }
 }
