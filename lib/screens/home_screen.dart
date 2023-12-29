@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:samachaar/widgets/app_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,19 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Sama"),
-            Text(
-              "Chaar",
-              style: TextStyle(
-                color: Colors.blue,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
+        title: appBar(),
         centerTitle: true,
         elevation: 0.0,
       ),
