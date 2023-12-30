@@ -1,4 +1,4 @@
-# samachaar
+# Samachaar
 
 A new Flutter project.
 
