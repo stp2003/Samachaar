@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:samachaar/model/article_model.dart';
 import 'package:samachaar/model/slider_model.dart';
 import 'package:samachaar/services/category_data.dart';
-import 'package:samachaar/services/slider_data.dart';
 import 'package:samachaar/widgets/app_bar.dart';
 import 'package:samachaar/widgets/build_image.dart';
 import 'package:samachaar/widgets/build_indicator.dart';
@@ -11,6 +10,7 @@ import 'package:samachaar/widgets/trending_news.dart';
 
 import '../model/category_model.dart';
 import '../services/news_dart.dart';
+import '../services/slider_data.dart';
 import '../widgets/category_tile.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -40,11 +40,21 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  //?? get slider data ->
+  getSlider() async {
+    Sliders slider = Sliders();
+    await slider.getSlider();
+    sliders = slider.sliders;
+    setState(() {
+      loading2 = false;
+    });
+  }
+
   //?? init
   @override
   void initState() {
     categories = getCategories();
-    sliders = getSliders();
+    getSlider();
     getNews();
     super.initState();
   }
@@ -114,33 +124,38 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 25.0),
-                    CarouselSlider.builder(
-                      itemCount: sliders.length,
-                      itemBuilder: (context, index, realIndex) {
-                        String? img = sliders[index].image;
-                        String? name = sliders[index].name;
-                        return BuildImage(
-                            image: img!, index: index, name: name!);
-                      },
-                      options: CarouselOptions(
-                        height: 250,
-                        autoPlay: true,
-                        enlargeCenterPage: true,
-                        enlargeStrategy: CenterPageEnlargeStrategy.height,
-                        onPageChanged: (index, reason) {
-                          setState(
-                            () {
-                              activeIndex = index;
+                    loading2
+                        ? const Center(child: CircularProgressIndicator())
+                        : CarouselSlider.builder(
+                            itemCount: 5,
+                            itemBuilder: (context, index, realIndex) {
+                              String? img = sliders[index].urlToImage;
+                              String? name = sliders[index].title;
+                              return BuildImage(
+                                image: img!,
+                                index: index,
+                                name: name!,
+                              );
                             },
-                          );
-                        },
-                      ),
-                    ),
+                            options: CarouselOptions(
+                              height: 250,
+                              autoPlay: true,
+                              enlargeCenterPage: true,
+                              enlargeStrategy: CenterPageEnlargeStrategy.height,
+                              onPageChanged: (index, reason) {
+                                setState(
+                                  () {
+                                    activeIndex = index;
+                                  },
+                                );
+                              },
+                            ),
+                          ),
                     const SizedBox(height: 30.0),
                     Center(
                       child: BuildIndicator(
                         activeIndex: activeIndex,
-                        count: sliders.length,
+                        count: 5,
                       ),
                     ),
                     const SizedBox(height: 35.0),

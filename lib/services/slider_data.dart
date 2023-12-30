@@ -1,33 +1,36 @@
-import 'package:samachaar/model/slider_model.dart';
+import 'dart:convert';
 
-List<SliderModel> getSliders() {
+import 'package:http/http.dart' as http;
+import 'package:samachaar/constant/api_key.dart';
+
+import '../model/slider_model.dart';
+
+class Sliders {
   List<SliderModel> sliders = [];
-  SliderModel sliderModel = SliderModel();
 
-  sliderModel.name = "Business";
-  sliderModel.image = "assets/business.jpg";
-  sliders.add(sliderModel);
-  sliderModel = SliderModel();
+  Future<void> getSlider() async {
+    String url =
+        "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=$apiKey";
+    var response = await http.get(Uri.parse(url));
 
-  sliderModel.name = "Entertainment";
-  sliderModel.image = "assets/entertainment.jpg";
-  sliders.add(sliderModel);
-  sliderModel = SliderModel();
+    var jsonData = jsonDecode(response.body);
 
-  sliderModel.name = "General";
-  sliderModel.image = "assets/general.jpg";
-  sliders.add(sliderModel);
-  sliderModel = SliderModel();
-
-  sliderModel.name = "Health";
-  sliderModel.image = "assets/health.jpg";
-  sliders.add(sliderModel);
-  sliderModel = SliderModel();
-
-  sliderModel.name = "Sports";
-  sliderModel.image = "assets/sport.jpg";
-  sliders.add(sliderModel);
-  sliderModel = SliderModel();
-
-  return sliders;
+    if (jsonData['status'] == 'ok') {
+      jsonData["articles"].forEach(
+        (element) {
+          if (element["urlToImage"] != null && element['description'] != null) {
+            SliderModel sliderModel = SliderModel(
+              title: element["title"],
+              description: element["description"],
+              url: element["url"],
+              urlToImage: element["urlToImage"],
+              content: element["content"],
+              author: element["author"],
+            );
+            sliders.add(sliderModel);
+          }
+        },
+      );
+    }
+  }
 }

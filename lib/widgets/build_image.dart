@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class BuildImage extends StatelessWidget {
@@ -20,8 +21,8 @@ class BuildImage extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
-            child: Image.asset(
-              image,
+            child: CachedNetworkImage(
+              imageUrl: image,
               height: 250.0,
               fit: BoxFit.cover,
               width: MediaQuery.of(context).size.width,
