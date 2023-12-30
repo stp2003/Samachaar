@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:samachaar/constant/colors.dart';
+import 'package:samachaar/screens/article_view.dart';
 
 class TrendingNews extends StatelessWidget {
   final String imageUrl, title, desc, url;
@@ -16,7 +17,13 @@ class TrendingNews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => ArticleView(blogUrl: url),
+          ),
+        );
+      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 10.0),
         child: Padding(
