@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:samachaar/model/article_model.dart';
 import 'package:samachaar/model/slider_model.dart';
+import 'package:samachaar/screens/all_news.dart';
 import 'package:samachaar/services/category_data.dart';
 import 'package:samachaar/widgets/app_bar.dart';
 import 'package:samachaar/widgets/build_image.dart';
@@ -107,7 +108,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           InkWell(
                             splashColor: Colors.purple,
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => const AllNews(
+                                    news: 'Breaking',
+                                  ),
+                                ),
+                              );
+                            },
                             child: const Text(
                               "View All",
                               style: TextStyle(
@@ -174,7 +183,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => const AllNews(
+                                    news: 'Trending',
+                                  ),
+                                ),
+                              );
+                            },
                             child: const Text(
                               "View All",
                               style: TextStyle(
