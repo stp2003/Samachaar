@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:samachaar/screens/category_news.dart';
 
 class CategoryTile extends StatelessWidget {
   final String image, categoryName;
@@ -12,7 +13,13 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => CategoryNews(name: categoryName),
+          ),
+        );
+      },
       child: Container(
         margin: const EdgeInsets.only(right: 16),
         child: Stack(
